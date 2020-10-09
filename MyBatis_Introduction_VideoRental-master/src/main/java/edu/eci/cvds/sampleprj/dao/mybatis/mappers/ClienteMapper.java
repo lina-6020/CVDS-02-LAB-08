@@ -19,7 +19,7 @@ public interface ClienteMapper {
      * @param fechainicio
      * @param fechafin 
      */
-    public void agregarItemRentadoACliente(@Param("idcl") int id,
+    public void agregarItemRentadoACliente(@Param("idcl") long id,
             @Param("idit") int idit,
             @Param("Fechai") Date fechainicio,
             @Param("Fechaf") Date fechafin);
@@ -33,5 +33,8 @@ public interface ClienteMapper {
 	public void insertarCliente(Cliente cliente);
 
 	public Cliente consultarCliente(long id);
+	
+	public void vetarCliente (@Param("cliente")long idCliente,@Param ("estado") int estado);
+	
     
 }

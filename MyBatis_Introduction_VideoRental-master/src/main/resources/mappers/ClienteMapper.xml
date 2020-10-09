@@ -82,5 +82,14 @@
 	left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
 		WHERE c.documento=#{idcli} ;
 	</select>
+	
+	<update id="vetarCliente" parameterType="map">
+        update VI_CLIENTES set vetado=#{estado} where documento=#{cliente};
+    </update>
+    
+    <insert id="insertarCliente" parameterType="map">
+        insert into VI_CLIENTES(documento,nombre,telefono,direccion,email,vetado)
+        values (#{cliente.documento},#{cliente.nombre},#{cliente.telefono},#{cliente.direccion},#{cliente.email},#{cliente.vetado});
+    </insert>
 
 </mapper>

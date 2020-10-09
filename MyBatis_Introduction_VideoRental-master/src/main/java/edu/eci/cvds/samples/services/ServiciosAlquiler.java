@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ServiciosAlquiler {
 
-   public abstract int valorMultaRetrasoxDia(int itemId);
+   public abstract long valorMultaRetrasoxDia(int itemId) throws ExcepcionServiciosAlquiler;
 
    public abstract Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler;
 
@@ -30,7 +30,7 @@ public interface ServiciosAlquiler {
    * @obj consultar los items que estan disponibles para alquiler
    * @return el listado de items disponibles
    */
-   public abstract List<Item> consultarItemsDisponibles();
+   public abstract List<Item> consultarItemsDisponibles()throws ExcepcionServiciosAlquiler;
 
    /**
    * @obj consultar el valor de la multa del alquiler, dado el id del item
@@ -61,7 +61,9 @@ public interface ServiciosAlquiler {
    * el mismo ya esta alquilado
    */
    public abstract void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler;
-
+   
+   public abstract void registrarTipoItem(TipoItem tipoItem) throws ExcepcionServiciosAlquiler;
+   
    public abstract void registrarCliente(Cliente p) throws ExcepcionServiciosAlquiler;
 
    /**

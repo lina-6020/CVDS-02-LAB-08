@@ -20,12 +20,6 @@ public class TipoItem implements Serializable{
         this.descripcion = descripcion;
     }
 
-    public TipoItem() {
-    }
-    
-    
-    
-
     public int getID() {
         return id;
     }
