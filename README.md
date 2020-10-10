@@ -2,6 +2,8 @@
 ## Parte I. Inicio en clase   
 En esta parte inicial utilizamos el proyecto del laboratorio anterior e hicimos algunas actualizaciones tales como:
 * Se creo la interface ```ItemDAO``` y lo utilizamos como referencia para las demas entidades ```ClienteDAO``` y ```TipoItemDAO```.Usando como referencia la implementación de ```ItemDAO:MyBATISItemDao``` creamos el ```DAO MyBATIS``` de las demas entidades ```MyBATISClienteDAO```,```MyBATISItemDao``` y ```MyBATISTipoItemDAO```.Creamos la clase ```ServiciosAlquiler``` e hicimos la implementación de ```ServiciosAlquilerImpl``` , ```ServiciosAlquilerItemsStub``` y ```ServiciosAlquilerFactory```. Logrando la siguiente estructura funcional.
+![image](https://user-images.githubusercontent.com/59893804/95645213-8b0f6400-0a82-11eb-8d68-9afd3790de9f.png)
+
 * Comprobamos que a través de la capa lógica se puede consultar un cliente.
 
 ## Parte II. Pruebas
