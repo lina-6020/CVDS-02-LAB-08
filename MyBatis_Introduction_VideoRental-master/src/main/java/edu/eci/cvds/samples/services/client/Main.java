@@ -7,8 +7,9 @@ import edu.eci.cvds.samples.services.ServiciosAlquilerFactory;
 
 public class Main {
 	public static void main(Strings []args)throws ExcepcionServiciosAlquiler{
-		 System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarCliente(0));
-	     System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarCostoAlquiler(99,2));
+		 System.out.println("------CONSULTAMAIN------");
+		 System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarCliente(6584562));
+	     System.out.println(ServiciosAlquilerFactory.getInstance().getServiciosAlquiler().consultarCostoAlquiler(199,4));
 	     System.exit(0);
 	}
 }

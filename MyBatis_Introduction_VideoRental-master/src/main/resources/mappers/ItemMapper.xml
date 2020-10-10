@@ -8,35 +8,26 @@
 
   
     
-    <select parameterType="map" id="consultarItems" resultMap="ItemResult">
-        SELECT 
-        i.id ,
-        i.nombre ,
-        i.descripcion,
-        i.fechalanzamiento  ,
-        i.tarifaxdia  ,
-        i.formatorenta  ,
-        i.genero ,        
-        ti.id as tipoitem_id,
-        ti.descripcion as tipoitem_descripcion 
-        from VI_ITEMS as i 
-        left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id ;
-        
-    </select>
+ 
     
     <select parameterType="map" id="consultarItem" resultMap="ItemResult">
-        SELECT 
+        select
         i.id ,
-        i.nombre ,
-        i.descripcion,
-        i.fechalanzamiento  ,
-        i.tarifaxdia  ,
-        i.formatorenta  ,
-        i.genero ,        
-        ti.id as tipoitem_id,
-        ti.descripcion as tipoitem_descripcion 
-        from VI_ITEMS as i ,VI_TIPOITEM as ti
-        where i.TIPOITEM_id=ti.id and i.id = #{itid}
+        i.nombre as nombre,
+        i.descripcion as descripcion,
+        i.fechalanzamiento as fechalanzamiento ,
+        i.tarifaxdia as tarifaxdia ,
+        i.formatorenta  as formatorenta,
+        i.genero  as genero,
+
+        ti.id  as ti_id,
+        ti.descripcion as ti_descripcion
+
+        FROM VI_ITEMS as i
+        left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+        <if test="idit != null">
+            where i.id = #{idit}
+        </if>
     </select>
     
     <insert id="insertarItem" parameterType="map">

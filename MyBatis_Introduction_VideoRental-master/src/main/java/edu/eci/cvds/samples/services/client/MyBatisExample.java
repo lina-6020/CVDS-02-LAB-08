@@ -73,15 +73,15 @@ public class MyBatisExample {
         imprimirEspacios("Clientes por ID");
         System.out.println(clienteMapper.consultarCliente(3));
         //Para la ejecucion final de las pruebas quitar el comentario de la siguiente instruccion
-        //clienteMapper.agregarItemRentadoACliente(5, 1, parseDate("2020-03-12"), parseDate("2020-04-12"));
+        clienteMapper.agregarItemRentadoACliente(5, 1, parseDate("2020-03-12"), parseDate("2020-04-12"));
         ItemMapper itemMapper= sqlss.getMapper(ItemMapper.class);
-        TipoItem tipoIt= new TipoItem(73,"coronavirus");
-        //Item it = new Item(tipoIt,39621645,"NuevoItemxxx","Este es el nuevo Item xxxx",parseDate("2020-03-12"),9999, "hola","pop"); 
+        //TipoItem tipoIt= new TipoItem(73,"coronavirus");
+        //Item it = new Item(tipoIt,39621648,"NuevoItemxxx","Este es el nuevo Item xxxx",parseDate("2020-03-12"),9999, "hola","pop"); 
         //Para la ejecucion final de las pruebas quitar el comentario de la siguiente instruccion
         //itemMapper.insertarItem(it);
         
         imprimirEspacios("Items");
-        System.out.println(itemMapper.consultarItems());
+        System.out.println(itemMapper.consultarDisponibles());
         imprimirEspacios("Items Por ID");
         System.out.println(itemMapper.consultarItem(9999));
         

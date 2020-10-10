@@ -42,15 +42,15 @@ public class MyBATISItemDAO implements ItemDAO{
 	@Override
 	public List<Item>consultarItems()throws PersistenceException{
 		try {
-			return itemMapper.consultarItems();
+			return itemMapper.consultarDisponibles();
 		}catch (org.apache.ibatis.exceptions.PersistenceException e) {
 			throw new PersistenceException("Error al consultar los items", e);
 		}
 	}
 	@Override
-	public List<Item> consultarItemsDisponibles() throws PersistenceException{
+	public List<Item> consultarDisponibles() throws PersistenceException{
 		try {
-			return itemMapper.consultarItemsDisponibles();
+			return itemMapper.consultarDisponibles();
 		}catch (org.apache.ibatis.exceptions.PersistenceException e) {
 			throw new PersistenceException("No se pude consultar todos los items disponibles", e);
 		}

@@ -35,7 +35,7 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
        itemsrentados = new HashMap<>();
        tipositems = new HashMap<>();
        mapaPrestamosPorIdCliente=new HashMap<>();
-       poblar();
+       //poblar();
    }
 
    @Override
@@ -199,8 +199,11 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
    }
    @Override
    public void registrarTipoItem(TipoItem tipoItem) throws ExcepcionServiciosAlquiler {
-   	// TODO Auto-generated method stub
-   	
+	   if (!tipositems.containsKey(tipoItem.getID())) {
+           tipositems.put(tipoItem.getID(),tipoItem);
+       } else {
+           throw new ExcepcionServiciosAlquiler("El item " + tipoItem.getID() + " ya esta registrado.");
+       }
    }
 
    private void poblar() {
