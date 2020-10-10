@@ -34,7 +34,7 @@ public interface ClienteMapper {
 
 	public Cliente consultarCliente(long id);
 	
-	public void vetarCliente (@Param("cliente")long idCliente,@Param ("estado") int estado);
+	public void vetarCliente (@Param("cliente")long idCliente,@Param ("estado") Boolean estado);
 	
     
 }

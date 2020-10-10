@@ -18,6 +18,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mybatis.guice.transactional.Transactional;
+
 @Singleton
 public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
@@ -128,37 +130,83 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    }
 
    @Override
+   @Transactional
    public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+       LocalDate actual=date.toLocalDate();
+       LocalDate entrega=actual.plusDays(numdias);
+       if(numdias<1) {
+    	   throw new ExcepcionServiciosAlquiler("El numero de dias del alquiler debe ser mayor a 1");
+       }else if(consultarCliente(docu)==null) {
+    	   throw new ExcepcionServiciosAlquiler("El cliente no se encuentra en la base de datos");
+       }else if(consultarCliente(item.getId())==null) {
+    	   throw new ExcepcionServiciosAlquiler("No existe el item buscado");
+       }
+       for(ItemRentado itemRentado:consultarCliente(docu).getRentados()) {
+    	   if(itemRentado.getItem().getId()==item.getId()) {
+    		   throw new ExcepcionServiciosAlquiler("El item ya se encuentra alquilado"+item.getId());
+    	   }
+       }try {
+    	   clienteDAO.agregarItemRentadoACliente(docu, item.getId(),date,java.sql.Date.valueOf(entrega));
+       }catch (PersistenceException e) {
+    	   throw new ExcepcionServiciosAlquiler("Error al agregar el item"+item+"a los items rentados del cliente"+docu,e);
+	}
    }
-
    @Override
-   public void registrarCliente(Cliente c) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+   @Transactional
+   public void registrarCliente(Cliente cliente) throws ExcepcionServiciosAlquiler {
+       try {
+    	   clienteDAO.save(cliente);
+       }catch (PersistenceException e) {
+    	   throw new ExcepcionServiciosAlquiler("Error al registrar el cliente"+cliente,e);
+	}
    }
 
    @Override
    public long consultarCostoAlquiler(int iditem, int numdias) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+      Item item=consultarItem(iditem);
+      if(item==null || numdias<0) {
+    	  throw new ExcepcionServiciosAlquiler("Los datos ingresados son erroneos");
+      }else {
+    	  return item.getTarifaxDia()*numdias;
+      }
    }
 
    @Override
+   @Transactional
    public void actualizarTarifaItem(int id, long tarifa) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+       try {
+    	   itemDAO.actualizarTarifaItem(id, tarifa);
+       }catch (PersistenceException e) {
+    	   throw new ExcepcionServiciosAlquiler("Error al cambiar la tarifa del item"+id,e);
+	}
    }
    @Override
+   @Transactional
    public void registrarItem(Item i) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       try {
+    	   itemDAO.save(i);
+       }catch (PersistenceException e) {
+    	   throw new ExcepcionServiciosAlquiler("No se puede registrar este item"+i,e);
+	}
    }
 
    @Override
-   public void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   @Transactional
+   public void vetarCliente(long docu, Boolean estado) throws ExcepcionServiciosAlquiler {
+       try {
+    	   clienteDAO.vetarCliente(docu, estado);
+       }catch (PersistenceException e) {
+    	   throw new ExcepcionServiciosAlquiler("Error al vetar al cliente"+docu,e);
+	}
    }
 
    @Override
    public void registrarTipoItem(TipoItem tipoItem) throws ExcepcionServiciosAlquiler {
-	   throw new UnsupportedOperationException("Not supported yet");
+	   try {
+		   tipoItemDAO.insertarTipoItem(tipoItem);
+	   }catch (PersistenceException e) {
+		   throw new ExcepcionServiciosAlquiler("No se puede registrar el tipo de item"+tipoItem);
+	   }
 	
-}
+   }
 }

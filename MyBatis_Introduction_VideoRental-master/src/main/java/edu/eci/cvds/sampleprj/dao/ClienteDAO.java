@@ -14,6 +14,6 @@ public interface ClienteDAO {
 	
 	public void agregarItemRentadoACliente(long idCliente,int idItem,Date fechaInicio,Date fechaFin)throws PersistenceException;
 	
-	public void vetarCliente (long idCliente, int estado)throws PersistenceException;
+	public void vetarCliente (long idCliente, Boolean estado)throws PersistenceException;
 
 }

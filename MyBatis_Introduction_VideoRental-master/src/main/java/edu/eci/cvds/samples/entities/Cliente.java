@@ -88,8 +88,8 @@ public class Cliente implements Serializable{
         return vetado;
     }
 
-    public void setVetado(boolean betado) {
-        this.vetado = betado;
+    public void setVetado(boolean estado) {
+        this.vetado = estado;
     }
 
     public ArrayList<ItemRentado> getRentados() {
